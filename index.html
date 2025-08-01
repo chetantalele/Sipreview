@@ -4,201 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIP Review - Celebal Technologies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Indigo and Gray Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a single-page interactive report. It uses a series of vertically stacked, responsive cards, each representing a key section of the internship review (e.g., Objectives, Weekly Plan, Project Details). The core interaction is a click-to-expand card for the weekly learning plan, which allows the user to explore details on demand without cluttering the page. This design turns a linear presentation into a user-driven exploration, making it ideal for a portfolio piece. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Weekly Learning Plan -> Goal: Inform/Organize -> Viz: Interactive Cards (HTML/JS) -> Interaction: Click card to toggle detail visibility -> Justification: This method presents a large amount of sequential information (8 weeks) in an organized, non-overwhelming way. It encourages active engagement from the user, who can choose which week's details they want to see.
+        - Report Info: Technology Stack -> Goal: Inform -> Viz: List with Unicode Icons -> Interaction: Static visual -> Justification: Using Unicode characters for visual cues is an effective, lightweight way to make the list more scannable and visually appealing without using heavy image assets.
+        - Report Info: All other sections -> Goal: Inform -> Viz: Simple text and bulleted lists within cards -> Interaction: Hover effect -> Justification: This clean, consistent card layout provides a cohesive visual style for the entire report, ensuring readability and a professional appearance.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        header {
-            background-color: #4F46E5;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 2rem;
-        }
-        .section-title {
-            font-size: 1.8rem;
-            margin: 1.5rem 0 1rem;
-            color: #4F46E5;
-        }
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-        }
-        ul {
-            padding-left: 1.5rem;
-        }
-        li {
-            margin-bottom: 0.5rem;
-        }
-        .tech-icons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .tech-icons img {
-            width: 50px;
-            height: 50px;
-        }
-        .week-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        .week-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .week-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
         .week-details {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.3s ease-out;
         }
-        .week-card:hover .week-details {
+        .week-details.show {
             max-height: 300px;
+        }
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>Summer Internship Project (SIP) Review</h1>
-        <h2>at Celebal Technologies</h2>
-        <p>By: Chetan Talele | June–July 2025</p>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-indigo-700 text-white p-8 text-center shadow-lg">
+        <h1 class="text-4xl font-extrabold">Summer Internship Project (SIP) Review</h1>
+        <h2 class="text-2xl mt-2 font-semibold">at Celebal Technologies</h2>
+        <p class="text-md mt-2">By: Chetan Talele | June–July 2025</p>
     </header>
 
-    <div class="container">
-        <div class="card">
-            <h2 class="section-title">🎯 Internship Objective</h2>
-            <ul>
+    <div class="container mx-auto p-4 md:p-8">
+        <h2 class="text-3xl font-bold mt-8 mb-4 text-indigo-800">Project Overview</h2>
+        <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform hover:scale-105">
+            <p class="text-gray-700 leading-relaxed">
+                The final project was an <strong>Intelligent Flight Ticket Booking Bot</strong> that allows users to search, compare, and book flights using a chat interface. It streamlines the booking process by integrating real-time flight data APIs and responds to user queries via natural text inputs.
+            </p>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-8 mb-4 text-indigo-800">Week-wise Learning Plan</h2>
+        
+        <div class="space-y-4">
+            <!-- Week 1 Card -->
+            <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform" onclick="toggleContent(this)">
+                <div class="card-title">Week 1 - Introduction to Node.js</div>
+                <div class="week-details">
+                    <p class="text-gray-700 mt-2"><strong>Key Topics:</strong> Node.js Architecture (V8 Engine, Event-Driven, Non-Blocking I/O), The Node.js Ecosystem and Modules, Understanding package.json and Node.js REPL.</p>
+                    <p class="text-gray-700 mt-2"><strong>Assignment:</strong> Environment Setup & First Application. To install Node.js and NPM, and to create and run a basic "Hello World" server.</p>
+                    <p class="text-gray-700 mt-2"><strong>Outcome:</strong> Successfully configured the development environment, which was foundational for all subsequent tasks.</p>
+                </div>
+            </div>
+
+            <!-- Week 2 Card -->
+            <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform" onclick="toggleContent(this)">
+                <div class="card-title">Week 2 - Core Modules & NPM</div>
+                <div class="week-details">
+                    <p class="text-gray-700 mt-2"><strong>Key Topics:</strong> Utilizing core modules like `fs` (File System), `http` (HTTP server), `path`, and `util`. Deep diving into NPM for package management and scripting.</p>
+                    <p class="text-gray-700 mt-2"><strong>Assignment:</strong> File Management Tool. Built a command-line tool to perform file operations using Node.js core modules.</p>
+                    <p class="text-gray-700 mt-2"><strong>Outcome:</strong> Gained practical experience in handling asynchronous file operations and managing project dependencies with NPM.</p>
+                </div>
+            </div>
+
+            <!-- Week 3 Card -->
+            <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform" onclick="toggleContent(this)">
+                <div class="card-title">Week 3 - Asynchronous Programming</div>
+                <div class="week-details">
+                    <p class="text-gray-700 mt-2"><strong>Key Topics:</strong> In-depth study of the Node.js Event Loop, callback hell, Promises, and the modern `async/await` syntax for writing clean asynchronous code.</p>
+                    <p class="text-gray-700 mt-2"><strong>Assignment:</strong> Promise-based file operations. Refactored previous assignments to use Promises and async/await, improving code readability and error handling.</p>
+                    <p class="text-gray-700 mt-2"><strong>Outcome:</strong> Developed a solid understanding of Node.js's asynchronous nature, which is crucial for building performant web applications.</p>
+                </div>
+            </div>
+
+            <!-- Week 4 Card -->
+            <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform" onclick="toggleContent(this)">
+                <div class="card-title">Week 4 - Express.js Basics & Middleware</div>
+                <div class="week-details">
+                    <p class="text-gray-700 mt-2"><strong>Key Topics:</strong> Setting up an Express.js server, defining routes, using URL parameters, and understanding how middleware works for request processing.</p>
+                    <p class="text-gray-700 mt-2"><strong>Assignment:</strong> Express web server. Created a multi-route web server that served static files and handled basic API requests.</p>
+                    <p class="text-gray-700 mt-2"><strong>Outcome:</strong> Gained experience in building a structured web server and utilizing Express's core features for routing and serving content.</p>
+                </div>
+            </div>
+
+            <!-- Week 5 Card -->
+            <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform" onclick="toggleContent(this)">
+                <div class="card-title">Week 5 - MongoDB CRUD & Schema Design</div>
+                <div class="week-details">
+                    <p class="text-gray-700 mt-2"><strong>Key Topics:</strong> Integrating MongoDB with Node.js, Mongoose ODM for schema design, and implementing Create, Read, Update, and Delete (CRUD) operations.</p>
+                    <p class="text-gray-700 mt-2"><strong>Assignment:</strong> CRUD app with MongoDB. Developed a simple REST API that connected to a MongoDB database to manage a collection of data.</p>
+                    <p class="text-gray-700 mt-2"><strong>Outcome:</strong> Successfully linked the Node.js backend with a NoSQL database, learning how to persist and retrieve data effectively.</p>
+                </div>
+            </div>
+
+            <!-- Week 6 Card -->
+            <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform" onclick="toggleContent(this)">
+                <div class="card-title">Week 6 - REST APIs & Error Handling</div>
+                <div class="week-details">
+                    <p class="text-gray-700 mt-2"><strong>Key Topics:</strong> Designing RESTful API endpoints, handling various HTTP methods (GET, POST, PUT, DELETE), and implementing a robust error-handling middleware.</p>
+                    <p class="text-gray-700 mt-2"><strong>Assignment:</strong> RESTful API development. Built a clean, testable API with proper routing and a global error-handling mechanism.</p>
+                    <p class="text-gray-700 mt-2"><strong>Outcome:</strong> Understood the principles of REST and created a well-structured API ready for client-side consumption.</p>
+                </div>
+            </div>
+
+            <!-- Week 7 Card -->
+            <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform" onclick="toggleContent(this)">
+                <div class="card-title">Week 7 - JWT Authentication & Security</div>
+                <div class="week-details">
+                    <p class="text-gray-700 mt-2"><strong>Key Topics:</strong> Implementing JSON Web Tokens (JWT) for stateless authentication, using `bcrypt` for secure password hashing, and adding middleware to protect routes.</p>
+                    <p class="text-gray-700 mt-2"><strong>Assignment:</strong> JWT Auth system. Developed user login and registration endpoints, securing private routes with JWT tokens.</p>
+                    <p class="text-gray-700 mt-2"><strong>Outcome:</strong> Gained crucial knowledge in securing API endpoints and user data, a fundamental skill for backend development.</p>
+                </div>
+            </div>
+
+            <!-- Week 8 Card -->
+            <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform" onclick="toggleContent(this)">
+                <div class="card-title">Week 8 - Advanced Express & Project Enhancement</div>
+                <div class="week-details">
+                    <p class="text-gray-700 mt-2"><strong>Key Topics:</strong> Advanced Express patterns, file uploads with `multer`, and reviewing the entire project structure for scalability and performance optimizations.</p>
+                    <p class="text-gray-700 mt-2"><strong>Assignment:</strong> Enhance Express app. Integrated new features and refactored code to finalize the project for the review.</p>
+                    <p class="text-gray-700 mt-2"><strong>Outcome:</strong> Completed the final project and gained a comprehensive understanding of the full backend development lifecycle.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-8 mb-4 text-indigo-800">Project Details</h2>
+        <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform hover:scale-105">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">🎯 Internship Objective</h3>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
                 <li>Gain hands-on backend development experience.</li>
                 <li>Learn Node.js, Express.js, MongoDB, and RESTful API development.</li>
                 <li>Understand backend architecture, security, and deployment practices.</li>
                 <li>Develop a full-stack intelligent chatbot for flight booking.</li>
             </ul>
-        </div>
 
-        <div class="card">
-            <h2 class="section-title">🏢 About Celebal Technologies</h2>
-            <ul>
-                <li>Enterprise AI and Cloud Solutions company.</li>
-                <li>Partners with Microsoft, Snowflake, Databricks, AWS.</li>
-                <li>Specializes in AI, ML, Big Data, Cloud Services.</li>
-                <li>Industries served: Healthcare, Retail, Finance, Manufacturing.</li>
+            <h3 class="text-xl font-semibold text-indigo-700 mt-6 mb-2">🛠️ Technology Stack</h3>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+                <li><span class="font-bold">Backend:</span> Node.js, Express.js</li>
+                <li><span class="font-bold">Database:</span> MongoDB, Mongoose</li>
+                <li><span class="font-bold">Authentication:</span> JWT, bcrypt</li>
+                <li><span class="font-bold">Testing:</span> Postman</li>
+                <li><span class="font-bold">Version Control:</span> Git + GitHub</li>
             </ul>
         </div>
-
-        <div class="card">
-            <h2 class="section-title">📅 Weekly Internship Plan</h2>
-            <div class="week-grid">
-                <div class="week-card">
-                    <strong>Week 1</strong>
-                    <div class="week-details">
-                        <ul><li>Node.js basics, setup, REPL, modules, simple server.</li></ul>
-                    </div>
-                </div>
-                <div class="week-card">
-                    <strong>Week 2</strong>
-                    <div class="week-details">
-                        <ul><li>Core modules (fs, http, path, util), NPM and scripts.</li></ul>
-                    </div>
-                </div>
-                <div class="week-card">
-                    <strong>Week 3</strong>
-                    <div class="week-details">
-                        <ul><li>Async programming, Promises, async/await, error handling.</li></ul>
-                    </div>
-                </div>
-                <div class="week-card">
-                    <strong>Week 4</strong>
-                    <div class="week-details">
-                        <ul><li>Express.js, routing, middleware, static files.</li></ul>
-                    </div>
-                </div>
-                <div class="week-card">
-                    <strong>Week 5</strong>
-                    <div class="week-details">
-                        <ul><li>MongoDB, CRUD, schema design, validation.</li></ul>
-                    </div>
-                </div>
-                <div class="week-card">
-                    <strong>Week 6</strong>
-                    <div class="week-details">
-                        <ul><li>REST APIs, testing, versioning, middleware auth.</li></ul>
-                    </div>
-                </div>
-                <div class="week-card">
-                    <strong>Week 7</strong>
-                    <div class="week-details">
-                        <ul><li>JWT auth, hashing, salting, rate limiting.</li></ul>
-                    </div>
-                </div>
-                <div class="week-card">
-                    <strong>Week 8</strong>
-                    <div class="week-details">
-                        <ul><li>File uploads, performance, WebSocket, app structure.</li></ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2 class="section-title">💡 Project: Intelligent Flight Booking Bot</h2>
-            <ul>
-                <li>Chatbot interface for users to search, compare, and book flights.</li>
-                <li>Supports natural language inputs (e.g., "Book a flight from Delhi to Mumbai on 5th Aug").</li>
-                <li>Fetches real-time/mocked data from flight APIs.</li>
-                <li>Stores booking info securely using JWT-based login system.</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2 class="section-title">🛠️ Technology Stack</h2>
-            <ul>
-                <li><strong>Backend:</strong> Node.js, Express.js</li>
-                <li><strong>Database:</strong> MongoDB, Mongoose</li>
-                <li><strong>Authentication:</strong> JWT, bcrypt</li>
-                <li><strong>Testing:</strong> Postman</li>
-                <li><strong>Version Control:</strong> Git + GitHub</li>
-            </ul>
-            <div class="tech-icons">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
-            </div>
-        </div>
-
-        <div class="card">
-            <h2 class="section-title">📐 System Architecture</h2>
-            <ul>
+        
+        <h2 class="text-3xl font-bold mt-8 mb-4 text-indigo-800">System Architecture</h2>
+        <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform hover:scale-105">
+            <ul class="list-decimal list-inside space-y-2 text-gray-700">
                 <li>User sends input via chat interface.</li>
                 <li>Backend processes request using Express.js.</li>
                 <li>Server fetches flight info from third-party API.</li>
@@ -207,9 +168,9 @@
             </ul>
         </div>
 
-        <div class="card">
-            <h2 class="section-title">🚀 Key Features</h2>
-            <ul>
+        <h2 class="text-3xl font-bold mt-8 mb-4 text-indigo-800">Key Features</h2>
+        <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform hover:scale-105">
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
                 <li>User registration & JWT login.</li>
                 <li>Real-time flight search and booking.</li>
                 <li>Modular API with error handling & validation.</li>
@@ -217,9 +178,9 @@
             </ul>
         </div>
 
-        <div class="card">
-            <h2 class="section-title">🧠 Challenges & Solutions</h2>
-            <ul>
+        <h2 class="text-3xl font-bold mt-8 mb-4 text-indigo-800">Challenges & Solutions</h2>
+        <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform hover:scale-105">
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>API Complexity:</strong> Used mock data & tested with Postman.</li>
                 <li><strong>Async Handling:</strong> Adopted async/await patterns with try/catch.</li>
                 <li><strong>JWT Setup:</strong> Implemented secure tokens with bcrypt & headers.</li>
@@ -227,20 +188,19 @@
             </ul>
         </div>
 
-        <div class="card">
-            <h2 class="section-title">📚 Learnings & Outcomes</h2>
-            <ul>
+        <h2 class="text-3xl font-bold mt-8 mb-4 text-indigo-800">Learnings & Future Scope</h2>
+        <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform hover:scale-105">
+            <h3 class="text-xl font-semibold text-indigo-700 mb-2">📚 Learnings & Outcomes</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
                 <li>Full backend app development cycle.</li>
                 <li>RESTful API building and integration skills.</li>
                 <li>JWT security implementation.</li>
                 <li>Debugging, modularization, scalability knowledge.</li>
                 <li>Collaboration using Git and agile practices.</li>
             </ul>
-        </div>
 
-        <div class="card">
-            <h2 class="section-title">🔮 Future Scope</h2>
-            <ul>
+            <h3 class="text-xl font-semibold text-indigo-700 mt-6 mb-2">🔮 Future Scope</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
                 <li>Integrate payment gateway.</li>
                 <li>Deploy chatbot on WhatsApp/Telegram.</li>
                 <li>Add real-time airline price tracking.</li>
@@ -248,15 +208,21 @@
             </ul>
         </div>
 
-        <div class="card">
-            <h2 class="section-title">🙏 Acknowledgment</h2>
-            <ul>
-                <li>Thanks to Celebal Technologies for this opportunity.</li>
-                <li>Guidance from mentors and college professors.</li>
-                <li>Support from peers and team members.</li>
-            </ul>
-            <p><strong>Thank you for your time and attention!</strong></p>
+        <div class="card bg-white rounded-lg p-6 shadow-md transition-all duration-300 transform hover:scale-105 mt-8">
+            <h2 class="section-title text-center text-indigo-800 mb-0">🙏 Acknowledgment</h2>
+            <p class="text-center text-gray-700 mt-4">
+                Thanks to Celebal Technologies for this opportunity. Guidance from mentors and college professors. Support from peers and team members.
+            </p>
+            <p class="text-center text-gray-900 font-bold mt-4">Thank you for your time and attention!</p>
         </div>
     </div>
+
+<script>
+    function toggleContent(card) {
+        const details = card.querySelector('.week-details');
+        details.classList.toggle('show');
+    }
+</script>
+
 </body>
 </html>
