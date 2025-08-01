@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Review - Celebal Technologies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #4F46E5;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 2rem;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            margin: 1.5rem 0 1rem;
+            color: #4F46E5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        ul {
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .tech-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .tech-icons img {
+            width: 50px;
+            height: 50px;
+        }
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .week-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .week-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .week-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .week-card:hover .week-details {
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Summer Internship Project (SIP) Review</h1>
+        <h2>at Celebal Technologies</h2>
+        <p>By: Chetan Talele | June–July 2025</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2 class="section-title">🎯 Internship Objective</h2>
+            <ul>
+                <li>Gain hands-on backend development experience.</li>
+                <li>Learn Node.js, Express.js, MongoDB, and RESTful API development.</li>
+                <li>Understand backend architecture, security, and deployment practices.</li>
+                <li>Develop a full-stack intelligent chatbot for flight booking.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">🏢 About Celebal Technologies</h2>
+            <ul>
+                <li>Enterprise AI and Cloud Solutions company.</li>
+                <li>Partners with Microsoft, Snowflake, Databricks, AWS.</li>
+                <li>Specializes in AI, ML, Big Data, Cloud Services.</li>
+                <li>Industries served: Healthcare, Retail, Finance, Manufacturing.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">📅 Weekly Internship Plan</h2>
+            <div class="week-grid">
+                <div class="week-card">
+                    <strong>Week 1</strong>
+                    <div class="week-details">
+                        <ul><li>Node.js basics, setup, REPL, modules, simple server.</li></ul>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <strong>Week 2</strong>
+                    <div class="week-details">
+                        <ul><li>Core modules (fs, http, path, util), NPM and scripts.</li></ul>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <strong>Week 3</strong>
+                    <div class="week-details">
+                        <ul><li>Async programming, Promises, async/await, error handling.</li></ul>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <strong>Week 4</strong>
+                    <div class="week-details">
+                        <ul><li>Express.js, routing, middleware, static files.</li></ul>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <strong>Week 5</strong>
+                    <div class="week-details">
+                        <ul><li>MongoDB, CRUD, schema design, validation.</li></ul>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <strong>Week 6</strong>
+                    <div class="week-details">
+                        <ul><li>REST APIs, testing, versioning, middleware auth.</li></ul>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <strong>Week 7</strong>
+                    <div class="week-details">
+                        <ul><li>JWT auth, hashing, salting, rate limiting.</li></ul>
+                    </div>
+                </div>
+                <div class="week-card">
+                    <strong>Week 8</strong>
+                    <div class="week-details">
+                        <ul><li>File uploads, performance, WebSocket, app structure.</li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">💡 Project: Intelligent Flight Booking Bot</h2>
+            <ul>
+                <li>Chatbot interface for users to search, compare, and book flights.</li>
+                <li>Supports natural language inputs (e.g., "Book a flight from Delhi to Mumbai on 5th Aug").</li>
+                <li>Fetches real-time/mocked data from flight APIs.</li>
+                <li>Stores booking info securely using JWT-based login system.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">🛠️ Technology Stack</h2>
+            <ul>
+                <li><strong>Backend:</strong> Node.js, Express.js</li>
+                <li><strong>Database:</strong> MongoDB, Mongoose</li>
+                <li><strong>Authentication:</strong> JWT, bcrypt</li>
+                <li><strong>Testing:</strong> Postman</li>
+                <li><strong>Version Control:</strong> Git + GitHub</li>
+            </ul>
+            <div class="tech-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">📐 System Architecture</h2>
+            <ul>
+                <li>User sends input via chat interface.</li>
+                <li>Backend processes request using Express.js.</li>
+                <li>Server fetches flight info from third-party API.</li>
+                <li>Database stores booking and user info securely.</li>
+                <li>Chatbot returns best options to the user in real time.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">🚀 Key Features</h2>
+            <ul>
+                <li>User registration & JWT login.</li>
+                <li>Real-time flight search and booking.</li>
+                <li>Modular API with error handling & validation.</li>
+                <li>Clean folder structure and reusable routes.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">🧠 Challenges & Solutions</h2>
+            <ul>
+                <li><strong>API Complexity:</strong> Used mock data & tested with Postman.</li>
+                <li><strong>Async Handling:</strong> Adopted async/await patterns with try/catch.</li>
+                <li><strong>JWT Setup:</strong> Implemented secure tokens with bcrypt & headers.</li>
+                <li><strong>Modularity:</strong> Separated logic using routers/controllers.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">📚 Learnings & Outcomes</h2>
+            <ul>
+                <li>Full backend app development cycle.</li>
+                <li>RESTful API building and integration skills.</li>
+                <li>JWT security implementation.</li>
+                <li>Debugging, modularization, scalability knowledge.</li>
+                <li>Collaboration using Git and agile practices.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">🔮 Future Scope</h2>
+            <ul>
+                <li>Integrate payment gateway.</li>
+                <li>Deploy chatbot on WhatsApp/Telegram.</li>
+                <li>Add real-time airline price tracking.</li>
+                <li>Build analytics dashboard for admins.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">🙏 Acknowledgment</h2>
+            <ul>
+                <li>Thanks to Celebal Technologies for this opportunity.</li>
+                <li>Guidance from mentors and college professors.</li>
+                <li>Support from peers and team members.</li>
+            </ul>
+            <p><strong>Thank you for your time and attention!</strong></p>
+        </div>
+    </div>
+</body>
+</html>
